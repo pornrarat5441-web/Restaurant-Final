@@ -1,15 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Kitchen Dashboard</title>
+
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-  <h1>Kitchen Dashboard</h1>
+  <!-- Top Bar -->
+  <div class="topbar">
 
-  <div id="order-list"></div>
+    <div class="top-left">
+
+  🍽
+
+  <span class="green-dot"></span>
+
+  <span id="prepare-count">0</span>
+
+  <button class="history-btn">
+    📜 History
+  </button>
+
+</div>
+
+    <div class="top-right">
+
+      <div class="top-item">
+        ⏱
+        <span id="preparing-count">0</span>
+      </div>
+
+      <div class="top-item">
+        🍳
+        <span id="done-count">0</span>
+      </div>
+
+      <div class="top-item">
+        🍜
+        <span id="sendout-count">0</span>
+      </div>
+
+      <div class="clock">
+        🕒
+        <span id="clock-time">16:00</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Header -->
+  <div class="table-header">
+
+    <div>TABLE</div>
+    <div>ORDER</div>
+    <div>TIME</div>
+    <div>MENUS</div>
+    <div>STATUS</div>
+
+  </div>
+
+  <!-- Orders -->
+  <div id="orders-container"></div>
 
   <script src="app.js"></script>
+
 </body>
 </html>
