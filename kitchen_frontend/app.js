@@ -150,7 +150,7 @@ function buildStatusBtn(status, orderId) {
       class="status-btn ${current.className}"
       data-id="${orderId}"
       data-status="${status}"
-    >g
+    >
       <span>${current.label}</span>
       <span>${current.icon}</span>
     </button>
@@ -268,6 +268,8 @@ function attachEvents() {
 
       // Remove card when sent
       if (nextStatus === null) {
+
+        window.location.href = "choose.html";
 
         const card = document.getElementById(`card-${orderId}`);
 
