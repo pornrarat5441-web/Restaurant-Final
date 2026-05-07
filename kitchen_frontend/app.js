@@ -150,7 +150,7 @@ function buildStatusBtn(status, orderId) {
       class="status-btn ${current.className}"
       data-id="${orderId}"
       data-status="${status}"
-    >
+    >g
       <span>${current.label}</span>
       <span>${current.icon}</span>
     </button>
