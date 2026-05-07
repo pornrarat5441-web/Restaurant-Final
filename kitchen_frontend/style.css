@@ -316,6 +316,7 @@ body{
   .status-col{
     justify-content:flex-start;
   }
+}
 
   .history-btn{
   border:none;
@@ -331,7 +332,7 @@ body{
   font-size:15px;
 
   transition:0.3s;
-}
+  }
 
 .history-btn:hover{
   transform:scale(1.03);
