@@ -67,7 +67,7 @@ function renderHistory() {
 // back button
 
 function goDashboard() {
-  window.location.href = 'index.html';
+  window.location.href = 'kitchen.html';
 }
 
 renderHistory();

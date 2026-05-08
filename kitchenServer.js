@@ -10,13 +10,21 @@ connectDB();
 
 app.use(express.json());
 
-// static folders
-app.use("/", express.static(path.join(__dirname, "defaultPages")));
 
-app.use(
-  "/kitchenDashboard",
-  express.static(path.join(__dirname, "kitchen_frontend"))
-);
+// static folders
+app.use(express.static(path.join(__dirname, 'public')));
+
+//to the first page
+app.use('/', (req, res) => {
+  res.redirect('/default');
+});
+
+// app.use("/", express.static(path.join(__dirname, "defaultPages")));
+
+// app.use(
+//   "/kitchenDashboard",
+//   express.static(path.join(__dirname, "kitchen_frontend"))
+// );
 
 // start server
 const PORT = process.env.PORT || 8080;
