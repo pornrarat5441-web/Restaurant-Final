@@ -9,4 +9,6 @@ const waiterSchema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
-export const Waiter = mongoose.model('Waiter', waiterSchema);
+// export const Waiter = mongoose.model('Waiter', waiterSchema);
+
+module.exports = mongoose.model('Waiter', waiterSchema);

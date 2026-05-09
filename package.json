@@ -16,8 +16,8 @@
   "main": "kitchenServer.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www"
+    "start": "node kitchenServer.js",
+    "dev": "nodemon kitchenServer.js"
   },
   "dependencies": {
     "dotenv": "^17.4.2",
