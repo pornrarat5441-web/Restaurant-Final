@@ -110,7 +110,6 @@ function renderApp(){
     app.innerHTML = `
       <div class="order-card">
 
-
         <div class="content">
 
           <div class="table-section">
