@@ -7,6 +7,8 @@
    const path = require('path');
 
    const orderRoutes = require('../routes/routeOrder.js');
+   const waiterRoutes = require('../routes/routeWaiters.js');
+
 
    const app = express();
 
@@ -18,6 +20,7 @@
 
     //routes
     app.use('/', orderRoutes);
+    app.use('/', waiterRoutes);
 
     //to the first page
     app.get('/', (req, res) => {

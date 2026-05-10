@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const waiterSchema = new mongoose.Schema({
   name: { type: String, required: true, unique: true },
@@ -6,7 +6,8 @@ const waiterSchema = new mongoose.Schema({
     type: String, 
     enum: ['available', 'busy'], 
     default: 'available' 
-  }
+  },
+  deviceId: { type: String }
 }, { timestamps: true });
 
 // export const Waiter = mongoose.model('Waiter', waiterSchema);

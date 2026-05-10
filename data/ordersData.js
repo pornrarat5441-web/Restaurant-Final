@@ -1,3 +1,7 @@
+const waiters = require('./waitersData');
+//waiters name
+const availableWaiter = waiters.find(w => w.status === "available");
+
 const orders = [
   {
     id: "ORD002",
@@ -14,15 +18,15 @@ const orders = [
         qty: 1
       }
     ],
-    waiterName: "Nina",
+    waiterName: availableWaiter.name,
     servingStatus: "inprocess",
     servingTime: "20:00",
-    deviceId: "DEV001"
+    deviceId: availableWaiter.deviceId
   },
   {
-        id: "ORD003",
-    table: 5,
-    time: "19:32",
+    id: "ORD004",
+    table: 3,
+    time: "19:30",
     status: "prepare",
     menus: [
       {
@@ -30,74 +34,14 @@ const orders = [
         qty: 2
       },
       {
-        name: "Sprite",
+        name: "Magarita",
         qty: 1
       }
     ],
-    waiterName: "John",
+    waiterName: availableWaiter.name,
     servingStatus: "inprocess",
-    servingTime: "22:00",
-    deviceId: "DEV002"
-  },
-  {
-        id: "ORD004",
-    table: 5,
-    time: "19:32",
-    status: "prepare",
-    menus: [
-      {
-        name: "Ramen",
-        qty: 2
-      },
-      {
-        name: "Sprite",
-        qty: 1
-      }
-    ],
-    waiterName: "Jane",
-    servingStatus: "inprocess",
-    servingTime: "22:00",
-    deviceId: "DEV002"
-  },
-    {
-        id: "ORD005",
-    table: 5,
-    time: "19:32",
-    status: "prepare",
-    menus: [
-      {
-        name: "Ramen",
-        qty: 2
-      },
-      {
-        name: "Sprite",
-        qty: 1
-      }
-    ],
-    waiterName: "John",
-    servingStatus: "inprocess",
-    servingTime: "22:00",
-    deviceId: "DEV002"
-  },
-      {
-        id: "ORD006",
-    table: 5,
-    time: "19:32",
-    status: "prepare",
-    menus: [
-      {
-        name: "Ramen",
-        qty: 2
-      },
-      {
-        name: "Sprite",
-        qty: 1
-      }
-    ],
-    waiterName: "John",
-    servingStatus: "inprocess",
-    servingTime: "22:00",
-    deviceId: "DEV002"
+    servingTime: "20:00",
+    deviceId: availableWaiter.deviceId
   }
   
 ];
