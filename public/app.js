@@ -2,6 +2,29 @@
    Kitchen Dashboard — app.js
    ============================ */
 
+   //import packages
+   const express = require('express');
+   const mongoose = require('mongoose');
+
+   const app = express();
+
+   const Order = require('./models/orders');
+   const orders = require('./data/ordersData');   
+
+   //crud for mongodbd
+   //adding data to mongodb
+   app.post('/orders', async (req,res) => {
+    try {
+      await Order.insertMany(orders);
+      res.send('add successfully');
+    } catch(err) {
+      console.log(err);
+      res.send('error');
+    }
+   });
+   //
+
+
 // ── SVG icons ──────────────────────────────────────────
 const ICONS = {
   pot: `
@@ -320,6 +343,9 @@ function updateClock() {
   }
 
 }
+
+//post and get for mongodb
+
 
 // ── Init ────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
