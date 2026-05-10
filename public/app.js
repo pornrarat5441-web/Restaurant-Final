@@ -4,24 +4,27 @@
 
    //import packages
    const express = require('express');
-   const mongoose = require('mongoose');
+   const path = require('path');
+
+   const orderRoutes = require('../routes/routeOrder.js');
 
    const app = express();
 
-   const Order = require('./models/orders');
-   const orders = require('./data/ordersData');   
+   //setting the system for crud in route.js
+    app.use(express.json());
 
-   //crud for mongodbd
-   //adding data to mongodb
-   app.post('/orders', async (req,res) => {
-    try {
-      await Order.insertMany(orders);
-      res.send('add successfully');
-    } catch(err) {
-      console.log(err);
-      res.send('error');
-    }
-   });
+    //static files
+    app.use(express.static(path.join(__dirname, 'public')));
+
+    //routes
+    app.use('/', orderRoutes);
+
+    //to the first page
+    app.get('/', (req, res) => {
+      res.redirect('/default');
+    });
+
+    module.exports = app;
    //
 
 
