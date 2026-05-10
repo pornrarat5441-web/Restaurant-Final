@@ -4,37 +4,21 @@ const availableWaiter = waiters.find(w => w.status === "available");
 
 const orders = [
   {
-    id: "ORD002",
-    table: 3,
-    time: "19:30",
+    id: "ORD09",
+    table: 9,
+    time: new Date().toLocaleTimeString(),
     status: "prepare",
     menus: [
       {
-        name: "Pizza",
-        qty: 2
-      },
-      {
-        name: "Cola",
+        name: "Carbonara Pasta",
         qty: 1
-      }
-    ],
-    waiterName: availableWaiter.name,
-    servingStatus: "inprocess",
-    servingTime: "20:00",
-    deviceId: availableWaiter.deviceId
-  },
-  {
-    id: "ORD004",
-    table: 3,
-    time: "19:30",
-    status: "prepare",
-    menus: [
+      },
       {
-        name: "Ramen",
+        name: "Watermelon Smoothie",
         qty: 2
       },
       {
-        name: "Magarita",
+        name: "Fired Rice with Salmon",
         qty: 1
       }
     ],

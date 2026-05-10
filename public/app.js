@@ -2,33 +2,16 @@
    Kitchen Dashboard — app.js
    ============================ */
 
-   //import packages
-   const express = require('express');
-   const path = require('path');
+// ── Order Data and Fetching
+let ordersData = [];
 
-   const orderRoutes = require('../routes/routeOrder.js');
-   const waiterRoutes = require('../routes/routeWaiters.js');
-
-
-   const app = express();
-
-   //setting the system for crud in route.js
-    app.use(express.json());
-
-    //static files
-    app.use(express.static(path.join(__dirname, 'public')));
-
-    //routes
-    app.use('/', orderRoutes);
-    app.use('/', waiterRoutes);
-
-    //to the first page
-    app.get('/', (req, res) => {
-      res.redirect('/default');
-    });
-
-    module.exports = app;
-   //
+fetch('/orders')
+  .then(res => res.json())
+  .then(data => {
+    ordersData = data;
+    renderOrders();
+  })
+  .catch(err => console.error('Error fetching orders:', err));
 
 
 // ── SVG icons ──────────────────────────────────────────
@@ -55,85 +38,7 @@ const ICONS = {
   `,
 };
 
-// ── Mock Order Data ─────────────────────────────────────
-const ORDERS_DATA = [
-
-  {
-    id: 'A01',
-    table: 1,
-    time: '15:30',
-    status: 'prepare',
-    menus: [
-      { name: 'ผัดผงกระหรี่', qty: 1 },
-      { name: 'ไข่เจียว', qty: 1 },
-      { name: 'ข้าวสวย', qty: 2 },
-    ],
-  },
-
-  {
-    id: 'A02',
-    table: 2,
-    time: '15:31',
-    status: 'done',
-    menus: [
-      { name: 'ผัดผงกระหรี่', qty: 1 },
-      { name: 'ไข่เจียว', qty: 1 },
-      { name: 'ข้าวสวย', qty: 2 },
-    ],
-  },
-
-  {
-    id: 'A03',
-    table: 3,
-    time: '15:32',
-    status: 'done',
-    menus: [
-      { name: 'ผัดผงกระหรี่', qty: 1 },
-      { name: 'ไข่เจียว', qty: 1 },
-      { name: 'ข้าวสวย', qty: 2 },
-    ],
-  },
-
-  {
-    id: 'A04',
-    table: 4,
-    time: '15:33',
-    status: 'preparing',
-    menus: [
-      { name: 'ผัดผงกระหรี่', qty: 1 },
-      { name: 'ไข่เจียว', qty: 1 },
-      { name: 'ข้าวสวย', qty: 2 },
-    ],
-  },
-
-  {
-    id: 'A05',
-    table: 5,
-    time: '15:36',
-    status: 'preparing',
-    menus: [
-      { name: 'ผัดผงกระหรี่', qty: 1 },
-      { name: 'ไข่เจียว', qty: 1 },
-      { name: 'ข้าวสวย', qty: 2 },
-    ],
-  },
-
-  {
-    id: 'A06',
-    table: 6,
-    time: '15:40',
-    status: 'prepare',
-    menus: [
-      { name: 'ผัดผงกระหรี่', qty: 1 },
-      { name: 'ไข่เจียว', qty: 1 },
-      { name: 'ข้าวสวย', qty: 2 },
-    ],
-  },
-
-  
-];
-
-// ── Status cycle ────────────────────────────────────────
+// ── Status cycle ──────────────────────────────────────── checked
 const STATUS_CYCLE = {
   prepare: 'preparing',
   preparing: 'done',
@@ -235,7 +140,7 @@ function renderOrders() {
 
   const container = document.getElementById('orders-container');
 
-  container.innerHTML = ORDERS_DATA.map(order => {
+  container.innerHTML = ordersData.map(order => {
     return buildCard(order);
   }).join('');
 
@@ -251,7 +156,7 @@ function updateTopbarStats() {
   let doneCount = 0;
   let sendoutCount = 0;
 
-  ORDERS_DATA.forEach(order => {
+  ordersData.forEach(order => {
 
     if (order.status === 'prepare') {
       prepareCount++;
@@ -291,7 +196,7 @@ function attachEvents() {
 
       const nextStatus = STATUS_CYCLE[currentStatus];
 
-      const order = ORDERS_DATA.find(item => item.id === orderId);
+      const order = ordersData.find(item => item.id === orderId);
 
       if (!order) return;
 
@@ -307,10 +212,10 @@ function attachEvents() {
 
         setTimeout(() => {
 
-          const index = ORDERS_DATA.findIndex(item => item.id === orderId);
+          const index = ordersData.findIndex(item => item.id === orderId);
 
           if (index !== -1) {
-            ORDERS_DATA.splice(index, 1);
+            ordersData.splice(index, 1);
           }
 
           renderOrders();
@@ -355,8 +260,6 @@ function updateClock() {
 
 // ── Init ────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-
-  renderOrders();
 
   updateClock();
 
