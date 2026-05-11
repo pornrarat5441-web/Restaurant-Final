@@ -28,7 +28,9 @@ router.get('/orders', async (req,res) => {
 //update
 router.put('/orders/:id', async (req,res) => {
   try {
-    await Order.findByIdAndUpdate(req.params.id, req.body);
+    await Order.findByIdAndUpdate(
+      { id: req.params.id},
+       req.body);
     res.send('update successfully');
   } catch(err) {
     console.log(err);

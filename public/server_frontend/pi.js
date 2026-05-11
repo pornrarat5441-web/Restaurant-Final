@@ -227,11 +227,34 @@ function rejectOrder(){
   renderApp();
 }
 
-function completeOrder(){
+async function completeOrder(){
 
-  currentState = "waiting";
+  try{
 
-  renderApp();
+    await fetch(`http://localhost:8080/orders/${orderData.id}`, {
+
+      method: 'PUT',
+
+      headers: {
+        'Content-Type': 'application/json'
+      },
+
+      body: JSON.stringify({
+        servingStatus: 'delivered'
+      })
+
+    });
+
+    currentState = "waiting";
+
+    renderApp();
+
+  }catch(error){
+
+    console.log(error);
+
+  }
+
 }
 
 renderApp();

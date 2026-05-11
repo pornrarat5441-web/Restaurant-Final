@@ -2,6 +2,6 @@ function selectServer(name){
 
   alert(`Order sent to ${name}`);
 
-  window.location.href = 'history.html';
+  window.location.href = 'kitchen.html';
 
 }
