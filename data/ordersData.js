@@ -4,22 +4,38 @@ const availableWaiter = waiters.find(w => w.status === "available");
 
 const orders = [
   {
-    id: "ORD09",
-    table: 9,
-    time: new Date().toLocaleTimeString(),
+    id: "A02",
+    table: 6,
+    time: getRealTimeforOrder(),
+    status: "preparing",
+    menus: [
+      {
+        name: "Lemonade",
+        qty: 1
+      },
+      {
+        name: "Carbonara Pasta",
+        qty: 2
+      }
+    ],
+    waiterName: availableWaiter.name,
+    servingStatus: "inprocess",
+    servingTime: "20:00",
+    deviceId: availableWaiter.deviceId
+  },
+  {
+    id: "A03",
+    table: 1,
+    time: getRealTimeforOrder(),
     status: "prepare",
     menus: [
       {
-        name: "Carbonara Pasta",
+        name: "Strawberry Milkshake",
         qty: 1
       },
       {
-        name: "Watermelon Smoothie",
+        name: "Pizza Magarita (S)",
         qty: 2
-      },
-      {
-        name: "Fired Rice with Salmon",
-        qty: 1
       }
     ],
     waiterName: availableWaiter.name,
@@ -29,5 +45,13 @@ const orders = [
   }
   
 ];
+
+function getRealTimeforOrder() {
+  const now = new Date();
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+
+  return `${hours}:${minutes}`
+}
 
 module.exports = orders;
