@@ -1,73 +1,108 @@
-// mock history data
+let HISTORY_DATA = [];
 
-const HISTORY_DATA = [
+async function loadHistory(){
 
-  {
-    table: 1,
-    order: 'A01',
-    time: '15:30',
-    server: 'Jane',
-    status: 'Delivered',
-  },
+  try{
 
-  {
-    table: 3,
-    order: 'A03',
-    time: '15:45',
-    server: 'John',
-    status: 'Delivered',
-  },
+    const res = await fetch('http://localhost:8080/orders');
 
-];
+    const data = await res.json();
 
-// render
+    // เอาเฉพาะ order ที่มี waiter
 
-function renderHistory() {
+    HISTORY_DATA = data.filter(order => order.waiterName);
+
+    renderHistory();
+
+  }catch(error){
+
+    console.log(error);
+
+  }
+
+}
+
+function renderHistory(){
 
   const container = document.getElementById('history-container');
 
-  container.innerHTML = HISTORY_DATA.map(item => {
+  // ไม่มี history
 
-    return `
+  if(HISTORY_DATA.length === 0){
 
-      <div class="order-card">
+    container.innerHTML = `
+      <div class="empty-history">
+        No history yet
+      </div>
+    `;
 
-        <div class="table-col">
-          ${item.table}
+    return;
+  }
+
+  // render cards
+
+  container.innerHTML = HISTORY_DATA.map(order => `
+
+    <div class="order-card">
+
+      <!-- TABLE -->
+
+      <div class="table-col">
+        ${order.table}
+      </div>
+
+      <!-- ORDER -->
+
+      <div class="order-col">
+        ${order.id}
+      </div>
+
+      <!-- TIME -->
+
+      <div class="time-col">
+        ${order.time}
+      </div>
+
+      <!-- SERVER -->
+
+      <div class="menu-col">
+
+        <div class="menu-row">
+          👩 ${order.waiterName || '-'}
         </div>
 
-        <div class="order-col">
-          ${item.order}
-        </div>
+      </div>
 
-        <div class="time-col">
-          ${item.time}
-        </div>
+      <!-- STATUS -->
 
-        <div class="menu-col">
-          ${item.server}
-        </div>
+      <div class="status-col">
 
-        <div class="status-col">
+        <div class="history-status ${order.servingStatus}">
 
-          <button class="status-btn btn-done">
-            ${item.status}
-          </button>
+          ${
+            order.servingStatus === 'delivered'
+            ? 'Delivered'
+            : 'In Process'
+          }
 
         </div>
 
       </div>
 
-    `;
+    </div>
 
-  }).join('');
+  `).join('');
 
 }
 
-// back button
+function goDashboard(){
 
-function goDashboard() {
-  window.location.href = 'kitchen.html';
+  window.location.href = 'index.html';
+
 }
 
-renderHistory();
+document.addEventListener('DOMContentLoaded', () => {
+
+  loadHistory();
+
+});

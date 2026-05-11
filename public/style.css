@@ -389,3 +389,53 @@ body{
 
   letter-spacing:1px;
 }
+
+/****************
+   HISTORY STATUS
+*****************/
+
+.history-status{
+
+  padding:14px 22px;
+
+  border-radius:999px;
+
+  font-size:16px;
+
+  font-weight:600;
+
+  min-width:170px;
+
+  text-align:center;
+}
+
+/* IN PROCESS */
+
+.inprocess{
+
+  background:#fff4d6;
+
+  color:#d48806;
+}
+
+/* DELIVERED */
+
+.delivered{
+
+  background:#d9f7be;
+
+  color:#389e0d;
+}
+
+/* EMPTY HISTORY */
+
+.empty-history{
+
+  margin-top:120px;
+
+  text-align:center;
+
+  font-size:24px;
+
+  color:#999;
+}
