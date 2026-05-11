@@ -127,7 +127,7 @@ function buildCard(order) {
       </div>
 
       <div class="status-col">
-        ${buildStatusBtn(order.status, order.id)}
+        ${buildStatusBtn(order.status, order._id)}
       </div>
 
     </div>
@@ -196,14 +196,14 @@ function attachEvents() {
 
       const nextStatus = STATUS_CYCLE[currentStatus];
 
-      const order = ordersData.find(item => item.id === orderId);
+      const order = ordersData.find(item => item._id === orderId);
 
       if (!order) return;
 
       // Remove card when sent
       if (nextStatus === null) {
 
-        window.location.href = "choose.html";
+        window.location.href = `choose.html?orderId=${orderId}`;
 
         const card = document.getElementById(`card-${orderId}`);
 
@@ -212,7 +212,7 @@ function attachEvents() {
 
         setTimeout(() => {
 
-          const index = ordersData.findIndex(item => item.id === orderId);
+          const index = ordersData.findIndex(item => item._id === orderId);
 
           if (index !== -1) {
             ordersData.splice(index, 1);
