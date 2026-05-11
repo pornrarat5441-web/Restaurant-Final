@@ -6,12 +6,12 @@ const waiters = [
   },
   {
   name: "Jane",
-  status: "busy",
+  status: "available",
   deviceId: "A02"
   },
     {
   name: "Andy",
-  status: "busy",
+  status: "available",
   deviceId: "A02"
   }
 ];

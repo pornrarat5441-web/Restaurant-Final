@@ -1,70 +1,54 @@
 const express = require('express');
 const router = express.Router();
 const Waiter = require('../models/waiters');
-const waiters = require('../data/waitersData');
 
-router.get('/', (req, res) => {
-  res.json(waiters);
-});
-
-//create
-router.post('/waiters', async (req,res) => {
-  try {
-
-    const newWaiter = new Waiter(req.body);
-
-    await newWaiter.save();
-
-    res.send('add successfully');
-
-  } catch(err) {
-
-    console.log(err);
-
-    res.send('error');
-
-  }
-});
-
-//read
-router.get('/waiters', async (req,res) => {
+// Read all waiters from database
+router.get('/', async (req, res) => {
   try {
     const data = await Waiter.find();
-    res.send(data);
-  } catch(err) {
+    res.json(data);
+  } catch (err) {
     console.log(err);
-    res.send('error');
+    res.status(500).send('error');
   }
 });
 
-//update
-router.put('/:id', async (req,res) => {
+// Create a new waiter
+router.post('/', async (req, res) => {
   try {
+    const newWaiter = new Waiter(req.body);
+    await newWaiter.save();
+    res.send('add successfully');
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('error');
+  }
+});
 
+// Update a waiter's status or details
+router.put('/:id', async (req, res) => {
+  try {
     const updated = await Waiter.findByIdAndUpdate(
       req.params.id,
       req.body,
-      { returnDocument: 'after' }
+      { new: true }
     );
-
     res.json(updated);
-
-  } catch(err) {
+  } catch (err) {
     console.log(err);
-    res.send('error');
+    res.status(500).send('error');
   }
 });
 
-//delete
-router.delete('/waiters/:id', async (req,res) => {
+// Delete a waiter
+router.delete('/:id', async (req, res) => {
   try {
     await Waiter.findByIdAndDelete(req.params.id);
     res.send('deleted successfully');
-  } catch(err) {
+  } catch (err) {
     console.log(err);
-    res.send('error');
+    res.status(500).send('error');
   }
 });
-
 
 module.exports = router;

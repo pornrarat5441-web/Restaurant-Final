@@ -18,16 +18,26 @@ if (!orderId) {
       waitersData.forEach(waiter => {
         const card = document.createElement('div');
         card.className = 'server-card';
+
+        if (waiter.status === 'busy') {
+          card.classList.add('busy');
+          card.style.opacity = '0.5';
+          card.style.pointerEvents = 'none';
+        }
+
         card.innerHTML = `
           <div class="avatar">
             ${waiter.name === 'John' ? '👨' : '👩'}
           </div>
           <h2>${waiter.name}</h2>
+          ${waiter.status === 'busy' ? '<div class="busy-badge">Busy</div>' : ''}
         `;
 
-        card.addEventListener('click', () => {
-          selectServer(waiter.name);
-        });
+        if (waiter.status !== 'busy') {
+          card.addEventListener('click', async () => {
+            await assignWaiter(orderId, waiter);
+          });
+        }
 
         container.appendChild(card);
       });
@@ -35,23 +45,39 @@ if (!orderId) {
     .catch(err => console.error('Error fetching waiters:', err));
 }
 
-async function selectServer(name) {
+async function assignWaiter(orderId, waiter) {
   if (!orderId) return;
 
   try {
-    const response = await fetch(`/orders/${orderId}`, {
+    const orderResponse = await fetch(`/orders/${orderId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ waiterName: name , servingTime: getRealTimeforOrder(), deviceId: waitersData.find(w => w.name === name).deviceId}),
+      body: JSON.stringify({
+        waiterName: waiter.name,
+        servingTime: getRealTimeforOrder(),
+        deviceId: waiter.deviceId
+      })
     });
 
-    if (!response.ok) {
+    if (!orderResponse.ok) {
       throw new Error('Failed to update order');
     }
 
-    alert(`Order assigned to ${name}`);
+    const waiterResponse = await fetch(`/waiters/${waiter._id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ status: 'busy' })
+    });
+
+    if (!waiterResponse.ok) {
+      throw new Error('Failed to update waiter status');
+    }
+
+    alert(`Order assigned to ${waiter.name}`);
     window.location.href = 'history.html';
   } catch (err) {
     console.error(err);
