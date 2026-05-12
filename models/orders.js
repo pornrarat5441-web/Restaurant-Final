@@ -17,7 +17,7 @@ const orderSchema = new mongoose.Schema({
   servingStatus: { 
     type: String, 
     enum: ['complete', 'inprocess', 'failed'],
-    required: false
+    default: null
   },
   servingTime: { type: String },
   deviceId: { type: String }

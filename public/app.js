@@ -108,7 +108,7 @@ function buildCard(order) {
 
   return `
 
-    <div class="order-card" id="card-${order.id}">
+      <div class="order-card" id="card-${order._id}">
 
       <div class="table-col">
         ${order.table}
@@ -139,24 +139,25 @@ function buildCard(order) {
 function renderOrders() {
 
   const container = document.getElementById('orders-container');
+  const visibleOrders = ordersData.filter(order => !order.waiterName);
 
-  container.innerHTML = ordersData.map(order => {
+  container.innerHTML = visibleOrders.map(order => {
     return buildCard(order);
   }).join('');
 
   attachEvents();
-  updateTopbarStats();
+  updateTopbarStats(visibleOrders);
 }
 
 // ── Update top stats ────────────────────────────────────
-function updateTopbarStats() {
+function updateTopbarStats(orders = []) {
 
   let prepareCount = 0;
   let preparingCount = 0;
   let doneCount = 0;
   let sendoutCount = 0;
 
-  ordersData.forEach(order => {
+  orders.forEach(order => {
 
     if (order.status === 'prepare') {
       prepareCount++;
@@ -227,7 +228,7 @@ function attachEvents() {
 
       // Update status
       order.status = nextStatus;
-
+      updateOrderStatus(orderId, nextStatus);
       renderOrders();
 
     });
@@ -235,6 +236,21 @@ function attachEvents() {
   });
 
 }
+
+//update order status in database
+function updateOrderStatus(orderId, newStatus) {
+  fetch(`/orders/${orderId}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ status: newStatus })
+  })
+  .then(res => res.json())
+  .then(data => {
+    // update local ordersData
+    renderOrders();
+  })
+  .catch(err => console.error('Error updating order:', err));
+};
 
 // ── Live clock ──────────────────────────────────────────
 function updateClock() {

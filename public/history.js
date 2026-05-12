@@ -60,7 +60,7 @@ function renderHistory(){
       <!-- TIME -->
 
       <div class="time-col">
-        ${order.time}
+        ${order.servingTime}
       </div>
 
       <!-- SERVER -->

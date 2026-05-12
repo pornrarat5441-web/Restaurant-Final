@@ -23,22 +23,18 @@ const orders = [
   //   servingTime: "20:00",
   //   deviceId: availableWaiter.deviceId
   // }
-      id: "A08",
-      table: 1,
+      id: "A09",
+      table: 9,
       time: getRealTimeforOrder(),
       status: "prepare",
       menus: [
         {
-          name: "Strawberry Milkshake",
-          qty: 1
-        },
-        {
-          name: "Pizza Magarita (S)",
-          qty: 2
+          name: "Macaron",
+          qty: 10
         }
       ],
       waiterName: null,
-      servingStatus: "inprocess",
+      servingStatus: null, //receive data from pi if the waiter click check mark for serving the order **
       servingTime: null, //serve at the time we click to choose the server
       deviceId: null
   }

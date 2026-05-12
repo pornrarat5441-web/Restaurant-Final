@@ -57,7 +57,8 @@ async function assignWaiter(orderId, waiter) {
       body: JSON.stringify({
         waiterName: waiter.name,
         servingTime: getRealTimeforOrder(),
-        deviceId: waiter.deviceId
+        deviceId: waiter.deviceId,
+        servingStatus: 'inprocess'
       })
     });
 
