@@ -27,6 +27,17 @@ const orderData = {
   ]
 };
 
+// let statusCounting = [];
+
+// fetch('/orders')
+//   .then(res => res.json())
+//   .then(data => {
+//     ordersData = data;
+//     renderApp();
+//   })
+//   .catch(err => console.error('Error fetching orders:', err));
+
+
 function renderApp(){
 
   const app = document.getElementById("app");
