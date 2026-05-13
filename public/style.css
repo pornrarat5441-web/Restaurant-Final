@@ -409,6 +409,14 @@ body{
   text-align:center;
 }
 
+/* FAILED */
+.failed{
+  background:#ffe3e3;
+
+  color:#e03131;
+}
+
+
 /* IN PROCESS */
 
 .inprocess{

@@ -82,7 +82,11 @@ function renderHistory(){
           ${
             order.servingStatus === 'delivered'
             ? 'Delivered'
-            : 'In Process'
+            : order.servingStatus === 'inprocess'
+            ? 'In Process'
+            : order.servingStatus === 'failed'
+            ? 'Failed'
+            : ''
           }
 
         </div>
