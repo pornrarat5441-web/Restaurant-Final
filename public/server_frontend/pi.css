@@ -259,7 +259,7 @@ body{
 
   padding:14px 28px;
 
-  border-radius:999px;
+  border-radius:9999px;
 
   font-size:22px;
 
@@ -272,9 +272,9 @@ body{
   border:none;
   background:#ff4d4f;
   color:white;
-  padding:14px 24px;
+  padding:10px 20px;
   border-radius:999px;
-  font-size:20px;
+  font-size:22px;
   cursor:pointer;
 }
 
@@ -299,7 +299,7 @@ body{
   
   right: 18px;
 
-  bottom: 0px;
+  bottom: 5px;
 }
 
 
