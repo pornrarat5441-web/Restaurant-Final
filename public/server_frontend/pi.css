@@ -265,7 +265,9 @@ body{
 
   cursor:pointer;
 
+
 }
+
 .fail-btn{
   border:none;
   background:#ff4d4f;
@@ -275,10 +277,31 @@ body{
   font-size:20px;
   cursor:pointer;
 }
+
 .action-buttons{
-  display:flex;
-  gap:12px;
+  display: flex;
+  align-items: center;
 }
+
+.action-buttons{
+
+  width:100%;
+
+  display:flex;
+
+  justify-content:center;
+
+  margin-top:20px;
+}
+.fail-wrapper{
+
+  position:absolute;
+  
+  right: 18px;
+
+  bottom: 0px;
+}
+
 
 /* WAITING DASHBOARD */
 
@@ -345,4 +368,43 @@ body{
 
 .waiter-icon {
   margin-right: 10px;
+}
+.fail-popup{
+
+  position:absolute;
+
+  bottom:52px;
+
+  right:0px;
+
+  background:white;
+
+  border-radius:14px;
+
+  box-shadow:0 4px 12px rgba(0,0,0,0.12);
+
+  padding:8px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:6px;
+
+  width:90px;
+}
+
+.fail-popup button{
+
+  border:none;
+
+  background:#f5f5f5;
+
+  border-radius:10px;
+
+  padding:6px;
+
+  font-size:12px;
+
+  cursor:pointer;
 }

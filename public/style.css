@@ -411,12 +411,6 @@ body{
   text-align:center;
 }
 
-/* FAILED */
-.failed{
-  background:#ffe3e3;
-
-  color:#e03131;
-}
 
 
 /* IN PROCESS */
@@ -437,6 +431,14 @@ body{
   color:#389e0d;
 }
 
+/* FAILED */
+.failed{
+  background:#ffe3e3;
+
+  color:#e03131;
+}
+
+
 /* EMPTY HISTORY */
 
 .empty-history{
@@ -448,10 +450,4 @@ body{
   font-size:24px;
 
   color:#999;
-}
-
-.top-left{
-  font-size: 10px;
-  color: dimgray;
-  
 }
