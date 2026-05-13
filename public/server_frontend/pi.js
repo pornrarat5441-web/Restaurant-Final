@@ -1,5 +1,7 @@
 let currentState = "waiting";
 
+let currentWaiter = null;
+
 const orderData = {
   id: "A01",
   table: 1,

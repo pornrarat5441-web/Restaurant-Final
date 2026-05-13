@@ -71,7 +71,7 @@ async function assignWaiter(orderId, waiter) {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ status: 'busy' })
+      body: JSON.stringify({ status: 'busy' , orderId: orderId })
     });
 
     if (!waiterResponse.ok) {

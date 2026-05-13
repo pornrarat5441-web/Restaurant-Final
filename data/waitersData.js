@@ -10,7 +10,10 @@ const waiters = [
   // deviceId: "A02"
   // },
     {
-
+  name: "Gerard",
+  status: "available",
+  deviceId: "A04",
+  orderId: null
     }
 ];
 

@@ -7,7 +7,8 @@ const waiterSchema = new mongoose.Schema({
     enum: ['available', 'busy'], 
     default: 'available' 
   },
-  deviceId: { type: String }
+  deviceId: { type: String },
+  orderId: { type: String, default: null }
 }, { timestamps: true });
 
 // export const Waiter = mongoose.model('Waiter', waiterSchema);
