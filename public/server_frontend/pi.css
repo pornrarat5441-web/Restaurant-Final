@@ -304,3 +304,25 @@ body{
 
   color:#333;
 }
+
+/* Decorating Waiters Choosing page */
+.waiters-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 20px;
+  row-gap: 20px;
+}
+.waiters-card {
+  display:flex;
+  font-size: 30px;
+  justify-content: center;
+  align-items: center;
+  background:white;
+  border-radius:18px;
+  min-height:75px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.06);
+}
+
+.waiter-icon {
+  margin-right: 10px;
+}

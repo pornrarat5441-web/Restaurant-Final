@@ -15,12 +15,20 @@ function renderWaiters(){
   const container = document.getElementById('waiters-container');
   container.innerHTML = waitersData.map(waiter => `
     <div class="waiters-card">
+      <span class="waiter-icon">${waiterIcon(waiter)}</span>
       ${waiter.name}
     </div>
   `).join('');
 }
 
 loadWaiters();
+
+function waiterIcon(waiter) {
+  if(waiter.name === "John") {
+    return "👨";
+  } else
+  return "👩‍🦰";  
+}
 
 function getRealTimeforOrder() {
   const now = new Date();
