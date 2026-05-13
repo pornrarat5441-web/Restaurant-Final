@@ -259,7 +259,22 @@ body{
   font-size:22px;
 
   cursor:pointer;
+
 }
+.fail-btn{
+  border:none;
+  background:#ff4d4f;
+  color:white;
+  padding:14px 24px;
+  border-radius:999px;
+  font-size:20px;
+  cursor:pointer;
+}
+.action-buttons{
+  display:flex;
+  gap:12px;
+}
+
 /* WAITING DASHBOARD */
 
 .waiting-dashboard{

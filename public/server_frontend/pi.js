@@ -67,7 +67,7 @@ function renderApp(){
       <div class="status-item">
         
         <div class="status-icon pink">
-          ⏲️
+          ⏱️
         </div>
 
         <div class="status-number">
@@ -80,7 +80,7 @@ function renderApp(){
       <div class="status-item">
 
         <div class="status-icon pink">
-          🍲
+          🍳
         </div>
 
         <div class="status-number">
@@ -93,7 +93,7 @@ function renderApp(){
       <div class="status-item">
 
         <div class="status-icon red">
-          🍽️
+          🍜
         </div>
 
         <div class="status-number">
@@ -204,13 +204,19 @@ function renderApp(){
           Table ${orderData.table}
         </div>
 
-        <button
-          class="complete-btn"
-          onclick="completeOrder()"
-        >
-          Complete
-        </button>
-
+      <div class="action-buttons">
+      <button
+      class="fail-btn"
+      onclick="showFailOptions()"
+      >
+      Fail
+      </button>
+      <button
+       class="complete-btn"
+       onclick="completeOrder()"
+       >
+       Complete
+      </button>
       </div>
     `;
   }
@@ -236,6 +242,23 @@ function rejectOrder(){
   currentState = "waiting";
 
   renderApp();
+}
+
+function showFailOptions(){
+  const reason = prompt(
+    'Choose reason:\n1. cancel order\n2. return order\n3. other'
+  );
+  let failReason = '';
+  if(reason === '1'){
+    failReason = 'cancel order';
+  }
+  else if(reason === '2'){
+    failReason = 'return order';
+  }
+  else{
+    failReason = 'other';
+  }
+  failOrder(failReason);
 }
 
 async function completeOrder(){
@@ -266,6 +289,25 @@ async function completeOrder(){
 
   }
 
+}
+
+async function failOrder(reason){
+  try{
+    await fetch(`/orders/${orderData.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        servingStatus: 'failed',
+        failReason: reason
+      })
+    });
+    currentState = "waiting";
+    renderApp();
+  }catch(error){
+    console.log(error);
+  }
 }
 
 renderApp();

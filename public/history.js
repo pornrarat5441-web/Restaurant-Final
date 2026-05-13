@@ -1,20 +1,19 @@
 let HISTORY_DATA = [];
 
-async function loadHistory(){
+async function loadHistory() {
 
-  try{
+  try {
 
     const res = await fetch('http://localhost:8080/orders');
 
     const data = await res.json();
 
     // เอาเฉพาะ order ที่มี waiter
-
     HISTORY_DATA = data.filter(order => order.waiterName);
 
     renderHistory();
 
-  }catch(error){
+  } catch (error) {
 
     console.log(error);
 
@@ -22,13 +21,12 @@ async function loadHistory(){
 
 }
 
-function renderHistory(){
+function renderHistory() {
 
   const container = document.getElementById('history-container');
 
   // ไม่มี history
-
-  if(HISTORY_DATA.length === 0){
+  if (HISTORY_DATA.length === 0) {
 
     container.innerHTML = `
       <div class="empty-history">
@@ -40,66 +38,68 @@ function renderHistory(){
   }
 
   // render cards
+  container.innerHTML = HISTORY_DATA.map(order => {
 
-  container.innerHTML = HISTORY_DATA.map(order => `
+    let statusText = '';
 
-    <div class="order-card">
+    if (order.servingStatus === 'complete') {
+      statusText = 'Delivered';
+    }
+    else if (order.servingStatus === 'failed') {
+      statusText = 'Failed';
+    }
+    else {
+      statusText = 'In Process';
+    }
 
-      <!-- TABLE -->
+    return `
+      <div class="order-card">
 
-      <div class="table-col">
-        ${order.table}
-      </div>
-
-      <!-- ORDER -->
-
-      <div class="order-col">
-        ${order.id}
-      </div>
-
-      <!-- TIME -->
-
-      <div class="time-col">
-        ${order.servingTime}
-      </div>
-
-      <!-- SERVER -->
-
-      <div class="menu-col">
-
-        <div class="menu-row">
-          👩 ${order.waiterName || '-'}
+        <!-- TABLE -->
+        <div class="table-col">
+          ${order.table}
         </div>
 
-      </div>
+        <!-- ORDER -->
+        <div class="order-col">
+          ${order.id}
+        </div>
 
-      <!-- STATUS -->
+        <!-- TIME -->
+        <div class="time-col">
+          ${order.servingTime}
+        </div>
 
-      <div class="status-col">
+        <!-- SERVER -->
+        <div class="menu-col">
 
-        <div class="history-status ${order.servingStatus}">
-
-          ${
-            order.servingStatus === 'delivered'
-            ? 'Delivered'
-            : order.servingStatus === 'inprocess'
-            ? 'In Process'
-            : order.servingStatus === 'failed'
-            ? 'Failed'
-            : ''
-          }
+          <div class="menu-row">
+            👩 ${order.waiterName || '-'}
+          </div>
 
         </div>
 
+        <!-- STATUS -->
+        <div class="status-col">
+
+          <div class="history-status ${order.servingStatus}">
+            ${statusText}
+          </div>
+
+          <div class="fail-reason">
+          ${order.failReason || ''}
+          </div>
+          
+        </div>
+
       </div>
+    `;
 
-    </div>
-
-  `).join('');
+  }).join('');
 
 }
 
-function goDashboard(){
+function goDashboard() {
 
   window.location.href = 'index.html';
 
