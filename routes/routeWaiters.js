@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Waiter = require('../models/waiters');
+const waitersData = require('../data/waitersData');
 
 // Read all waiters from database
 router.get('/', async (req, res) => {
@@ -13,11 +14,10 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Create a new waiter
+// Create waiters from data
 router.post('/', async (req, res) => {
   try {
-    const newWaiter = new Waiter(req.body);
-    await newWaiter.save();
+    await Waiter.insertMany(waitersData);
     res.send('add successfully');
   } catch (err) {
     console.log(err);

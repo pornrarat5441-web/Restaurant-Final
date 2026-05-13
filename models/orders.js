@@ -29,6 +29,16 @@ const orderSchema = new mongoose.Schema({
     default: null
   },
 
+  servingTime: {
+    type: String,
+    default: null
+  },
+
+  deviceId: {
+    type: String,
+    default: null
+  },
+
   failReason: {
     type: String,
     default: null

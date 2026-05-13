@@ -3,48 +3,8 @@ const waiters = require('./waitersData');
 const availableWaiter = waiters.find(w => w.status === "available");
 
 const orders = [
-  {
-      id: "A20",
-      table: 1,
-      time: getRealTimeforOrder(),
-      status: "prepare",
-      menus: [
-        {
-          name: "Milk Tea",
-          qty: 2
-        },
-        {
-          name: "Chocolate Pancake with Ice Cream",
-          qty: 1
-        }
-      ],
-      waiterName: null,
-      servingStatus: null, //receive data from pi if the waiter click check mark for serving the order **
-      servingTime: null, //serve at the time we click to choose the server
-      deviceId: null
-  },
     {
-      id: "A21",
-      table: 2,
-      time: getRealTimeforOrder(),
-      status: "prepare",
-      menus: [
-        {
-          name: "Caramel Macchiato",
-          qty: 2
-        },
-        {
-          name: "pizza with cheese",
-          qty: 1
-        }
-      ],
-      waiterName: null,
-      servingStatus: null, //receive data from pi if the waiter click check mark for serving the order **
-      servingTime: null, //serve at the time we click to choose the server
-      deviceId: null
-  },
-    {
-      id: "A22",
+      id: "A30",
       table: 3,
       time: getRealTimeforOrder(),
       status: "prepare",
@@ -61,7 +21,8 @@ const orders = [
       waiterName: null,
       servingStatus: null, //receive data from pi if the waiter click check mark for serving the order **
       servingTime: null, //serve at the time we click to choose the server
-      deviceId: null
+      deviceId: null,
+      failReason: null
   }
   
 ];
