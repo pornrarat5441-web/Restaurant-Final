@@ -4,11 +4,11 @@ async function loadHistory() {
 
   try {
 
-    const res = await fetch('http://localhost:8080/orders');
+    const res = await fetch('/orders');
 
     const data = await res.json();
 
-    // เอาเฉพาะ order ที่มี waiter
+    // แสดงเฉพาะ order ที่มี waiter แล้ว
     HISTORY_DATA = data.filter(order => order.waiterName);
 
     renderHistory();
@@ -42,14 +42,31 @@ function renderHistory() {
 
     let statusText = '';
 
+    // status color class
+    let statusClass = '';
+
     if (order.servingStatus === 'complete') {
+
       statusText = 'Delivered';
+
+      statusClass = 'delivered';
+
     }
+
     else if (order.servingStatus === 'failed') {
+
       statusText = 'Failed';
+
+      statusClass = 'failed';
+
     }
+
     else {
+
       statusText = 'In Process';
+
+      statusClass = 'inprocess';
+
     }
 
     return `
@@ -67,7 +84,7 @@ function renderHistory() {
 
         <!-- TIME -->
         <div class="time-col">
-          ${order.servingTime}
+          ${order.servingTime || '-'}
         </div>
 
         <!-- SERVER -->
@@ -82,14 +99,22 @@ function renderHistory() {
         <!-- STATUS -->
         <div class="status-col">
 
-          <div class="history-status ${order.servingStatus}">
-            ${statusText}
+          <div>
+
+            <div class="history-status ${statusClass}">
+              ${statusText}
+            </div>
+
+            ${order.failReason ? `
+
+              <div class="fail-reason">
+                ${order.failReason}
+              </div>
+
+            ` : ''}
+
           </div>
 
-          <div class="fail-reason">
-          ${order.failReason || ''}
-          </div>
-          
         </div>
 
       </div>

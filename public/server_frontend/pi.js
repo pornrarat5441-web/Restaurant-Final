@@ -1,7 +1,5 @@
 let currentState = "waiting";
 
-let currentWaiter = null;
-
 const orderData = {
   id: "A01",
   table: 1,
@@ -187,7 +185,7 @@ function renderApp(){
     `;
   }
 
-  // DELIVERING
+  // DELIVERING///////////////////////////////////////
 
   if(currentState === "delivering"){
 
@@ -207,19 +205,46 @@ function renderApp(){
         </div>
 
       <div class="action-buttons">
-      <button
-      class="fail-btn"
-      onclick="showFailOptions()"
-      >
-      Fail
-      </button>
-      <button
-       class="complete-btn"
-       onclick="completeOrder()"
-       >
-       Complete
-      </button>
+
+  <button
+    class="complete-btn"
+    onclick="completeOrder()"
+  >
+    Complete
+  </button>
+
+  <div class="fail-wrapper">
+
+    ${showFailMenu ? `
+
+      <div class="fail-popup">
+
+        <button onclick="failOrder('cancel order')">
+          Cancel Order
+        </button>
+
+        <button onclick="failOrder('return order')">
+          Return Order
+        </button>
+
+        <button onclick="failOrder('other')">
+          Other
+        </button>
+
       </div>
+
+    ` : ''}
+
+    <button
+      class="fail-btn"
+      onclick="toggleFailMenu()"
+    >
+      Fail
+    </button>
+
+  </div>
+
+</div>
     `;
   }
 
@@ -245,22 +270,12 @@ function rejectOrder(){
 
   renderApp();
 }
+function toggleFailMenu(){
 
-function showFailOptions(){
-  const reason = prompt(
-    'Choose reason:\n1. cancel order\n2. return order\n3. other'
-  );
-  let failReason = '';
-  if(reason === '1'){
-    failReason = 'cancel order';
-  }
-  else if(reason === '2'){
-    failReason = 'return order';
-  }
-  else{
-    failReason = 'other';
-  }
-  failOrder(failReason);
+  showFailMenu = !showFailMenu;
+
+  renderApp();
+
 }
 
 async function completeOrder(){
@@ -294,22 +309,39 @@ async function completeOrder(){
 }
 
 async function failOrder(reason){
+
   try{
+
     await fetch(`/orders/${orderData.id}`, {
+
       method: 'PUT',
+
       headers: {
         'Content-Type': 'application/json'
       },
+
       body: JSON.stringify({
+
         servingStatus: 'failed',
+
         failReason: reason
+
       })
+
     });
+
+    showFailMenu = false;
+
     currentState = "waiting";
+
     renderApp();
+
   }catch(error){
+
     console.log(error);
+
   }
+
 }
 
 renderApp();
