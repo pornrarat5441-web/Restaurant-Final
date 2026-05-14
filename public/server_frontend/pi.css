@@ -1,6 +1,6 @@
 *{
   margin:0;
-  padding:0;
+  padding:0 5px;
   box-sizing:border-box;
 }
 body{
@@ -18,7 +18,7 @@ body{
                       /* TOPBAR */
 
 .topbar{
-  height:56px;
+  height:50px;
 
   background:#f7e7e7;
 
@@ -89,6 +89,7 @@ body{
   color:white;
 
   padding:12px 18px;
+  margin-top: 10px;
 
   border-radius:12px;
 
@@ -200,16 +201,16 @@ body{
 }
 
                     /* DELIVER */
-
 .deliver-page{
-  height:250px;
+  min-height:200px;
+  height: auto;
 
   display:flex;
   flex-direction:column;
-  justify-content:center;
+  justify-content: flex-start;
   align-items:center;
 
-  gap:18px;
+  padding: 30px 20px;
 
   background:white;
 
@@ -219,19 +220,20 @@ body{
 .deliver-title{
   font-size:28px;
   color:#7d3f3f;
+  margin-bottom: 10px;
 }
 
 .deliver-order{
   font-size:56px;
   font-weight:bold;
-
   color:#7d3f3f;
+  margin-bottom: 5px;
 }
 
 .deliver-table{
   font-size:24px;
+  margin-bottom: 20px;
 }
-
         /*Complete and Fail BTN*/
 .complete-btn{
   border:none;
@@ -264,13 +266,12 @@ body{
 }
 
 .action-buttons{
-
+  height: auto;
   width:100%;
   display:flex;
   justify-content:center;
   align-items: center;
   position: relative;
-  margin-top:20px;
 }
 
 .fail-wrapper{
@@ -283,7 +284,7 @@ body{
 
 .waiting-dashboard{
 
-  height:220px;
+  height:125px;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -390,9 +391,10 @@ body{
   }
 
   .topbar{
-    height:42px;
-    padding:0 6px;
-    margin-bottom:4px;
+    height:50px;
+    padding:0 20px;
+    margin-top : 10px;
+    margin-bottom:15px;
     font-size:16px;
   }
   .top-left,
@@ -401,7 +403,8 @@ body{
 }
 
   .avatar{
-    font-size:28px;
+    font-size:20px;
+    color: black;
 }
 
   .status-dot{
@@ -411,7 +414,7 @@ body{
 
   .deliver-page{
     gap:8px;
-    padding:8px;
+    padding: 10px 20px;
   }
 
   .deliver-title{
@@ -427,7 +430,7 @@ body{
   }
 
   .menu-row{
-    font-size:11px;
+    font-size:18px;
   }
 
   .status-number{
@@ -440,7 +443,7 @@ body{
 
   .complete-btn,
   .fail-btn{
-    font-size:12px;
+    font-size:25px;
     padding:6px 10px;
   }
 

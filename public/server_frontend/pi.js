@@ -35,9 +35,6 @@ async function initApp() {
       console.log('Matched Order Data:', currentOrderData);
       
       if (currentOrderData) {
-        // FLOW FIX: 
-        // If waiter status is 'available' but they HAVE an orderId, it means the order is INCOMING (waiting for accept).
-        // If waiter status is 'busy', it means they already ACCEPTED and are DELIVERING.
         if (currentWaiterInfo.status === 'busy') {
           currentState = "delivering";
         } else {
@@ -61,6 +58,19 @@ function renderApp() {
   const app = document.getElementById("app");
   if (!app) return;
 
+  // 1. Calculate stats FIRST before rendering
+  let prepareCount = 0;
+  let preparingCount = 0;
+  let doneCount = 0;
+  let sendoutCount = 0;
+
+  ordersData.forEach(order => {
+    if (order.status === 'prepare') prepareCount++;
+    if (order.status === 'preparing') preparingCount++;
+    if (order.status === 'done') doneCount++;
+    if (order.status === 'sendout') sendoutCount++;
+  });
+
   // Update topbar info if needed (e.g., avatar/name)
   const avatar = document.querySelector('.avatar');
   if (avatar) avatar.textContent = currentWaiter || '👩';
@@ -71,19 +81,19 @@ function renderApp() {
       <div class="waiting-dashboard">
         <div class="status-item">
           <div class="status-icon">📋</div>
-          <div class="status-number">1</div>
+          <div class="status-number">${prepareCount}</div>
         </div>
         <div class="status-item">
           <div class="status-icon pink">⏱️</div>
-          <div class="status-number">2</div>
+          <div class="status-number">${preparingCount}</div>
         </div>
         <div class="status-item">
           <div class="status-icon pink">🍳</div>
-          <div class="status-number">2</div>
+          <div class="status-number">${doneCount}</div>
         </div>
         <div class="status-item">
           <div class="status-icon red">🍜</div>
-          <div class="status-number">1</div>
+          <div class="status-number">${sendoutCount}</div>
         </div>
       </div>
       <div style="margin-top: 20px; text-align: center;">
@@ -314,6 +324,22 @@ function getNowTime() {
   return now.getHours().toString().padStart(2, '0') + ':' + 
          now.getMinutes().toString().padStart(2, '0');
 }
+
+function getRealTimeforOrder() {
+  const now = new Date();
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const currentTime = `${hours}:${minutes}`;
+  const clock = document.getElementById('time');
+  if (clock) {
+    clock.textContent = currentTime;
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  getRealTimeforOrder();
+  setInterval(getRealTimeforOrder, 1000);
+});
 
 // Start the app
 initApp();

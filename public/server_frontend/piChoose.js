@@ -48,11 +48,45 @@ function waiterIcon(waiter) {
 
 function getRealTimeforOrder() {
   const now = new Date();
+
   const hours = String(now.getHours()).padStart(2, '0');
+
   const minutes = String(now.getMinutes()).padStart(2, '0');
 
-  return `${hours}:${minutes}`
+  const currentTime = `${hours}:${minutes}`;
+
+  const clock = document.getElementById('time');
+
+  if (clock) {
+    clock.textContent = currentTime;
+  }
 }
 
-const timeDisplay = document.getElementById('time');
-timeDisplay.innerHTML = getRealTimeforOrder();
+document.addEventListener('DOMContentLoaded', () => {
+
+  getRealTimeforOrder();
+
+  setInterval(getRealTimeforOrder, 1000);
+
+});
+
+// const timeDisplay = document.getElementById('time');
+// timeDisplay.innerHTML = getRealTimeforOrder();
+
+// function updateClock() {
+
+//   const now = new Date();
+
+//   const hours = String(now.getHours()).padStart(2, '0');
+
+//   const minutes = String(now.getMinutes()).padStart(2, '0');
+
+//   const currentTime = `${hours}:${minutes}`;
+
+//   const clock = document.getElementById('clock-time');
+
+//   if (clock) {
+//     clock.textContent = currentTime;
+//   }
+
+// }

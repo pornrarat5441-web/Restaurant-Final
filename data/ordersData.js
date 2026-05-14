@@ -4,7 +4,7 @@ const availableWaiter = waiters.find(w => w.status === "available");
 
 const orders = [
     {
-      id: "A38",
+      id: "A40",
       table: 5,
       time: getRealTimeforOrder(),
       status: "prepare",
@@ -21,7 +21,7 @@ const orders = [
       failReason: null
   },
       {
-      id: "A39",
+      id: "A41",
       table: 5,
       time: getRealTimeforOrder(),
       status: "prepare",
@@ -38,7 +38,7 @@ const orders = [
       failReason: null
   },
 {
-      id: "A35",
+      id: "A42",
       table: 5,
       time: getRealTimeforOrder(),
       status: "prepare",
