@@ -211,7 +211,7 @@ function renderApp(){
     class="complete-btn"
     onclick="completeOrder()"
   >
-    Complete
+    ✔
   </button>
 
   <div class="fail-wrapper">
@@ -240,7 +240,7 @@ function renderApp(){
       class="fail-btn"
       onclick="toggleFailMenu()"
     >
-      Fail
+      👎
     </button>
 
   </div>
