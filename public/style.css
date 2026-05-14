@@ -411,8 +411,6 @@ body{
   text-align:center;
 }
 
-
-
 /* IN PROCESS */
 
 .inprocess{
@@ -451,3 +449,20 @@ body{
 
   color:#999;
 }
+
+.failed{
+
+  background:#ffe1e1;
+
+  color:#cf1322;
+}
+
+.fail-reason{
+
+  margin-top:6px;
+
+  font-size:13px;
+
+  color:#999;
+}
+
