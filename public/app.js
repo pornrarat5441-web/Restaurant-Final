@@ -2,16 +2,29 @@
    Kitchen Dashboard — app.js
    ============================ */
 
+const socket = io();
+
 // ── Order Data and Fetching
 let ordersData = [];
 
-fetch('/orders')
-  .then(res => res.json())
-  .then(data => {
-    ordersData = data;
-    renderOrders();
-  })
-  .catch(err => console.error('Error fetching orders:', err));
+function fetchOrders() {
+  fetch('/orders')
+    .then(res => res.json())
+    .then(data => {
+      ordersData = data;
+      renderOrders();
+    })
+    .catch(err => console.error('Error fetching orders:', err));
+}
+
+// Initial fetch
+fetchOrders();
+
+// Listen for real-time updates
+socket.on('orders_updated', () => {
+  console.log('Orders updated, fetching new data...');
+  fetchOrders();
+});
 
 
 // ── SVG icons ──────────────────────────────────────────

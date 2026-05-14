@@ -1,3 +1,5 @@
+const socket = io();
+
 let HISTORY_DATA = [];
 
 async function loadHistory() {
@@ -20,6 +22,12 @@ async function loadHistory() {
   }
 
 }
+
+// Listen for real-time updates
+socket.on('orders_updated', () => {
+  console.log('Orders updated, refreshing history...');
+  loadHistory();
+});
 
 function renderHistory() {
 

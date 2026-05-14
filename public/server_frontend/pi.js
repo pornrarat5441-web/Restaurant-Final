@@ -1,3 +1,5 @@
+const socket = io();
+
 let currentState = "waiting";
 let showFailMenu = false;
 let ordersData = [];
@@ -12,6 +14,17 @@ const currentWaiter = localStorage.getItem('currentWaiter');
 if (!currentWaiter) {
   window.location.href = './piChoose.html';
 }
+
+// Socket listener for real-time updates
+socket.on('orders_updated', () => {
+  console.log('Orders updated, refreshing Pi app...');
+  initApp();
+});
+
+socket.on('waiters_updated', () => {
+  console.log('Waiters updated, refreshing Pi app...');
+  initApp();
+});
 
 async function initApp() {
   try {

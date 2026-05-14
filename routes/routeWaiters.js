@@ -18,6 +18,7 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     await Waiter.insertMany(waitersData);
+    if (req.io) req.io.emit('waiters_updated');
     res.send('add successfully');
   } catch (err) {
     console.log(err);
@@ -33,6 +34,7 @@ router.put('/:id', async (req, res) => {
       req.body,
       { new: true }
     );
+    if (req.io) req.io.emit('waiters_updated', updated);
     res.json(updated);
   } catch (err) {
     console.log(err);
@@ -44,6 +46,7 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     await Waiter.findByIdAndDelete(req.params.id);
+    if (req.io) req.io.emit('waiters_updated');
     res.send('deleted successfully');
   } catch (err) {
     console.log(err);

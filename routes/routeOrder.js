@@ -7,6 +7,7 @@ const orders = require('../data/ordersData');
 router.post('/orders', async (req,res) => {
   try {
     await Order.insertMany(orders);
+    if (req.io) req.io.emit('orders_updated');
     res.send('add successfully');
   } catch(err) {
     console.log(err);
@@ -29,12 +30,13 @@ router.get('/orders', async (req,res) => {
 router.put('/orders/:id', async (req, res) => {
   try {
 
-    await Order.findByIdAndUpdate(
+    const updatedOrder = await Order.findByIdAndUpdate(
       req.params.id,
       req.body,
       { returnDocument: 'after' }
     );
 
+    if (req.io) req.io.emit('orders_updated', updatedOrder);
     res.send('update successfully');
 
   } catch(err) {
@@ -47,6 +49,7 @@ router.put('/orders/:id', async (req, res) => {
 router.delete('/orders/:id', async (req,res) => {
   try {
     await Order.findByIdAndDelete(req.params.id);
+    if (req.io) req.io.emit('orders_updated');
     res.send('deleted successfully');
   } catch(err) {
     console.log(err);
