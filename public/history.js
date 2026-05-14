@@ -45,9 +45,9 @@ function renderHistory() {
     // status color class
     let statusClass = '';
 
-    if (order.servingStatus === 'delivered') {
+    if (order.servingStatus === 'complete') {
 
-      statusText = 'Delivered';
+      statusText = 'complete';
 
       statusClass = 'delivered';
 

@@ -4,17 +4,47 @@ const availableWaiter = waiters.find(w => w.status === "available");
 
 const orders = [
     {
-      id: "A30",
-      table: 3,
+      id: "A38",
+      table: 5,
       time: getRealTimeforOrder(),
       status: "prepare",
       menus: [
         {
-          name: "Orange Juice with Ice",
-          qty: 2
-        },
+          name: "Dirty Milky Donut (S)",
+          qty: 1
+        }
+      ],
+      waiterName: null,
+      servingStatus: null, //receive data from pi if the waiter click check mark for serving the order **
+      servingTime: null, //serve at the time we click to choose the server
+      deviceId: null,
+      failReason: null
+  },
+      {
+      id: "A39",
+      table: 5,
+      time: getRealTimeforOrder(),
+      status: "prepare",
+      menus: [
         {
-          name: "Dirty Chocolate Donut (XXL)",
+          name: "Dirty Milky Donut (S)",
+          qty: 1
+        }
+      ],
+      waiterName: null,
+      servingStatus: null, //receive data from pi if the waiter click check mark for serving the order **
+      servingTime: null, //serve at the time we click to choose the server
+      deviceId: null,
+      failReason: null
+  },
+{
+      id: "A35",
+      table: 5,
+      time: getRealTimeforOrder(),
+      status: "prepare",
+      menus: [
+        {
+          name: "Dirty Milky Donut (S)",
           qty: 1
         }
       ],

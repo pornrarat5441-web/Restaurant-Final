@@ -1,6 +1,5 @@
 let waitersData = [];
-let currentWaiter = null;
-module.exports = { currentWaiter };
+let currentWaiter = localStorage.getItem('currentWaiter') || null;
 
 async function loadWaiters(){
   try{
