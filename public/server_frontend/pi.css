@@ -18,7 +18,7 @@ body{
                       /* TOPBAR */
 
 .topbar{
-  height:42px;
+  height:56px;
 
   background:#f7e7e7;
 
@@ -38,6 +38,8 @@ body{
   display:flex;
   align-items:center;
   gap:8px;
+
+  font-size: 20px;
 }
 
 .top-left{
@@ -46,12 +48,12 @@ body{
 }
 
 .avatar{
-  font-size:20px;
+  font-size:30px;
 }
 
 .status-dot{
-  width:12px;
-  height:12px;
+  width:18px;
+  height:18px;
 
   border-radius:50%;
 
@@ -265,14 +267,15 @@ body{
 
   width:100%;
   display:flex;
-  justify-content:space-between;
+  justify-content:center;
   align-items: center;
+  position: relative;
   margin-top:20px;
 }
 
 .fail-wrapper{
-
-  position:static;
+  position:absolute;
+  right: 0;
 }
 
 
@@ -296,7 +299,7 @@ body{
 
 .status-icon{
 
-  font-size:40px;
+  font-size:52px;
 
   color:#444;
 }
@@ -311,7 +314,7 @@ body{
 
 .status-number{
 
-  font-size:40px;
+  font-size:54px;
 
   font-weight:300;
 
@@ -386,11 +389,24 @@ body{
   }
 
   .topbar{
-    height:28px;
+    height:42px;
     padding:0 6px;
     margin-bottom:4px;
-    font-size:10px;
+    font-size:16px;
   }
+  .top-left,
+  .top-right{
+    font-size:18px;
+}
+
+  .avatar{
+    font-size:28px;
+}
+
+  .status-dot{
+    width:16px;
+    height:16px;
+}
 
   .deliver-page{
     gap:8px;
@@ -414,11 +430,11 @@ body{
   }
 
   .status-number{
-    font-size:18px;
+    font-size:32px;
   }
 
   .status-icon{
-    font-size:18px;
+    font-size:32px;
   }
 
   .complete-btn,
