@@ -1,32 +1,34 @@
 let currentState = "waiting";
 let showFailMenu = false
+let orderId;
+import { currentWaiter } from './piChoose.js';
 
-const orderData = {
-  id: "A01",
-  table: 1,
+// const orderData = {
+//   id: "A01",
+//   table: 1,
 
-  menus: [
-    {
-      name: "ผัดผงกระหรี่",
-      qty: 1
-    },
+//   menus: [
+//     {
+//       name: "ผัดผงกระหรี่",
+//       qty: 1
+//     },
 
-    {
-      name: "ไข่เจียว",
-      qty: 1
-    },
+//     {
+//       name: "ไข่เจียว",
+//       qty: 1
+//     },
 
-    {
-      name: "ข้าวสวย",
-      qty: 2
-    },
+//     {
+//       name: "ข้าวสวย",
+//       qty: 2
+//     },
 
-    {
-      name: "ไข่ดาว",
-      qty: 1
-    }
-  ]
-};
+//     {
+//       name: "ไข่ดาว",
+//       qty: 1
+//     }
+//   ]
+// };
 
 // let statusCounting = [];
 
@@ -39,7 +41,37 @@ const orderData = {
 //   .catch(err => console.error('Error fetching orders:', err));
 
 
-function renderApp(){
+//fetching order data from database and use it with buildcard in pi function
+let ordersData = [];
+fetch('/orders')
+  .then(res => res.json())
+  .then(data => {
+    ordersData = data;
+    //function
+    renderApp();
+  })
+  .catch(err => console.error('Error fetching orders:', err));
+
+  let waiterData = [];
+  fetch('/waiters')
+    .then(res => res.json())
+    .then(data => {
+      waiterData = data;
+      //function
+      renderApp();
+    })
+    .catch(err => console.error('Error fetching waiters:', err));
+
+if (currentWaiter) {
+  const currenrOrder = waiterData.find(waiter => waiter.name === currentWaiter);
+  if (currentOrder) {
+    const orderId = currentOrder.orderId;
+  }
+}
+
+const currentOrderData = ordersData.find(order => order.id === orderId);
+
+function renderApp(currentOrderData){
 
   const app = document.getElementById("app");
 
@@ -131,7 +163,7 @@ function renderApp(){
             </div>
 
             <div class="table-number">
-              ${orderData.table}
+              ${currentOrderData.table}
             </div>
 
           </div>
@@ -139,12 +171,12 @@ function renderApp(){
           <div class="order-section">
 
             <div class="order-id">
-              ${orderData.id}
+              ${currentOrderData.id}
             </div>
 
             <div class="menu-list">
 
-              ${orderData.menus.map(menu => `
+              ${currentOrderData.menus.map(menu => `
                 <div class="menu-row">
 
                   <span>
@@ -198,11 +230,11 @@ function renderApp(){
         </div>
 
         <div class="deliver-order">
-          ${orderData.id}
+          ${currentOrderData.id}
         </div>
 
         <div class="deliver-table">
-          Table ${orderData.table}
+          Table ${currentOrderData.table}
         </div>
 
       <div class="action-buttons">
@@ -283,7 +315,7 @@ async function completeOrder(){
 
   try{
 
-    await fetch(`http://localhost:8080/orders/${orderData.id}`, {
+    await fetch(`http://localhost:8080/orders/${currentOrderData.id}`, {
 
       method: 'PUT',
 
@@ -313,7 +345,7 @@ async function failOrder(reason){
 
   try{
 
-    await fetch(`/orders/${orderData.id}`, {
+    await fetch(`/orders/${currentOrderData.id}`, {
 
       method: 'PUT',
 

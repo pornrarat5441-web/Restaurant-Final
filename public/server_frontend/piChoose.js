@@ -1,5 +1,6 @@
 let waitersData = [];
 let currentWaiter = null;
+module.exports = { currentWaiter };
 
 async function loadWaiters(){
   try{
@@ -34,6 +35,7 @@ function afterChoose() {
     if (!card) return;
     currentWaiter = card.dataset.name;
     localStorage.setItem('currentWaiter', currentWaiter);
+    window.location.href = './pi.html';
     console.log(currentWaiter);
   });
 }
