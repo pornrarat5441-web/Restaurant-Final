@@ -1,4 +1,5 @@
 let currentState = "waiting";
+let showFailMenu = false
 
 const orderData = {
   id: "A01",

@@ -1,4 +1,5 @@
 let waitersData = [];
+let currentWaiter = null;
 
 async function loadWaiters(){
   try{
@@ -6,6 +7,7 @@ async function loadWaiters(){
     const data = await res.json();
     waitersData = data;
     renderWaiters();
+    afterChoose(currentWaiter);
   }catch(error){
     console.error('loadWaiters error:', error);
   }
@@ -14,7 +16,7 @@ async function loadWaiters(){
 function renderWaiters(){
   const container = document.getElementById('waiters-container');
   container.innerHTML = waitersData.map(waiter => `
-    <div class="waiters-card">
+    <div class="waiters-card" data-name="${waiter.name}">
       <span class="waiter-icon">${waiterIcon(waiter)}</span>
       ${waiter.name}
     </div>
@@ -22,6 +24,19 @@ function renderWaiters(){
 }
 
 loadWaiters();
+
+afterChoose();
+
+function afterChoose() {
+  const chooseBtn = document.getElementById('waiters-container');
+  chooseBtn.addEventListener('click', (event) => {
+    const card = event.target.closest('.waiters-card');
+    if (!card) return;
+    currentWaiter = card.dataset.name;
+    localStorage.setItem('currentWaiter', currentWaiter);
+    console.log(currentWaiter);
+  });
+}
 
 function waiterIcon(waiter) {
   if(waiter.name === "John") {
