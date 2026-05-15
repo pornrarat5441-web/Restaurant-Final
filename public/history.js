@@ -134,7 +134,7 @@ function renderHistory() {
 
 function goDashboard() {
 
-  window.location.href = 'index.html';
+  window.location.href = 'kitchen.html';
 
 }
 
