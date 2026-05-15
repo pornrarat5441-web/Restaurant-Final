@@ -157,9 +157,10 @@ function buildCard(order) {
 
 // ── Render orders ───────────────────────────────────────
 function renderOrders() {
-
+  console.log('Rendering orders...');
   const container = document.getElementById('orders-container');
   const visibleOrders = ordersData.filter(order => !order.waiterName);
+  console.log('Visible orders count:', visibleOrders.length);
 
   container.innerHTML = visibleOrders.map(order => {
     return buildCard(order);
