@@ -10,7 +10,7 @@ body{
 
   font-family:Arial, sans-serif;
 
-  padding:18px;
+  padding:10px;
 
   overflow:hidden;
 }
@@ -288,14 +288,12 @@ body{
   display:flex;
   justify-content:center;
   align-items:center;
-  gap:20px;
 }
 
 .status-item{
 
   display:flex;
   align-items:center;
-  gap:8px;
 }
 
 .status-icon{
