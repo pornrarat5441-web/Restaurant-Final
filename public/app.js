@@ -10,7 +10,7 @@ socket.on('connect', () => {
 
 // Listen for real-time updates
 socket.on('orders_updated', () => {
-  console.log('Orders updated, fetching new data...');
+  console.log('Orders updated, calling fetchOrders()...');
   fetchOrders();
 });
 
@@ -18,9 +18,11 @@ socket.on('orders_updated', () => {
 let ordersData = [];
 
 function fetchOrders() {
+  console.log('Fetching orders from /orders...');
   fetch('/orders')
     .then(res => res.json())
     .then(data => {
+      console.log('Orders data received:', data);
       ordersData = data;
       renderOrders();
     })
