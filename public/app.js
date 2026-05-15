@@ -10,7 +10,7 @@ socket.on('connect', () => {
 
 // Listen for real-time updates
 socket.on('orders_updated', () => {
-  console.log('Orders updated, calling fetchOrders()...');
+  console.log('Orders updated signal received from server');
   fetchOrders();
 });
 

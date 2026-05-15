@@ -47,7 +47,8 @@
       "target": "portable"
     },
     "linux": {
-      "target": "deb"
+      "target": "deb",
+      "maintainer": "Nikita <pornrarat5441@gmail.com>"
     },
     "directories": {
       "output": "dist"

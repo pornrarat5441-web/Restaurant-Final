@@ -6,15 +6,18 @@ const orders = require('../data/ordersData');
 //create
 router.post('/orders', async (req,res) => {
   try {
-    await Order.insertMany(orders);
+    const newOrderData = req.body;
+    const newOrder = new Order(newOrderData);
+    await newOrder.save();
+    
     if (req.io) {
       req.io.emit('orders_updated');
-      console.log('DEBUG: Emitted orders_updated event');
+      console.log('DEBUG: Emitted orders_updated event for new order');
     }
-    res.send('add successfully');
+    res.status(201).json({ message: 'Order added successfully', order: newOrder });
   } catch(err) {
     console.log(err);
-    res.send('error');
+    res.status(500).send('error');
   }
 });
 
