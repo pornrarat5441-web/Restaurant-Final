@@ -17,7 +17,7 @@ function createWindows() {
   });
 
   // Load the Kitchen page from your local server
-  kitchenWindow.loadURL('http://localhost:8080/kitchen.html');
+  kitchenWindow.loadURL('https://restaurant-final-gzms.onrender.com/kitchen.html');
 
   // 2. Create the Pi (Waiter) Window
   piWindow = new BrowserWindow({
@@ -32,7 +32,7 @@ function createWindows() {
   });
 
   // Load the Pi page from your local server
-  piWindow.loadURL('http://localhost:8080/server_frontend/piChoose.html');
+  piWindow.loadURL('https://restaurant-final-gzms.onrender.com/server_frontend/piChoose.html');
 
   // Optional: Open DevTools for debugging
   // kitchenWindow.webContents.openDevTools();

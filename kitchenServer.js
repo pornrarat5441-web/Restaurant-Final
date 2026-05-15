@@ -56,7 +56,7 @@ async function startServer() {
 
   //to the first page
   app.get('/', (req, res) => {
-    res.redirect('/default');
+    res.redirect('/index.html');
   });
 
   // start server

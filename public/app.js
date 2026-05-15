@@ -2,7 +2,9 @@
    Kitchen Dashboard — app.js
    ============================ */
 
-const socket = io();
+const socket = io({
+  transports: ['websocket']
+});
 
 // ── Order Data and Fetching
 let ordersData = [];

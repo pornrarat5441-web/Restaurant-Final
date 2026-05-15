@@ -18,7 +18,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node kitchenServer.js",
     "dev": "nodemon kitchenServer.js",
-    "electron:start": "electron electron.js"
+    "electron:start": "electron electron.js",
+    "build:kitchen": "electron-builder build --config.extraMetadata.main=electron-kitchen.js -mw",
+    "build:pi": "electron-builder build --config.extraMetadata.main=electron-pi.js -mw"
   },
   "dependencies": {
     "dotenv": "^17.4.2",
@@ -29,6 +31,19 @@
   },
   "devDependencies": {
     "electron": "^42.0.1",
+    "electron-builder": "^26.8.1",
     "nodemon": "^3.1.14"
+  },
+  "build": {
+    "appId": "com.restaurant.app",
+    "mac": {
+      "target": "dmg"
+    },
+    "win": {
+      "target": "portable"
+    },
+    "directories": {
+      "output": "dist"
+    }
   }
 }
