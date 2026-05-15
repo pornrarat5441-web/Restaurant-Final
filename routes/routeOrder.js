@@ -6,8 +6,16 @@ const orders = require('../data/ordersData');
 //create
 router.post('/orders', async (req,res) => {
   try {
-    const newOrderData = req.body;
-    const newOrder = new Order(newOrderData);
+    let orderData = req.body;
+
+    // If body is empty, use the first item from ordersData.js as a fallback
+    if (!orderData || Object.keys(orderData).length === 0) {
+      orderData = orders[0]; 
+      // Generate a new unique ID or timestamp to avoid duplicate key errors if needed
+      orderData.id = "A" + Math.floor(Math.random() * 1000);
+    }
+
+    const newOrder = new Order(orderData);
     await newOrder.save();
     
     if (req.io) {
@@ -16,8 +24,8 @@ router.post('/orders', async (req,res) => {
     }
     res.status(201).json({ message: 'Order added successfully', order: newOrder });
   } catch(err) {
-    console.log(err);
-    res.status(500).send('error');
+    console.error('Order creation error:', err);
+    res.status(500).json({ error: err.message });
   }
 });
 

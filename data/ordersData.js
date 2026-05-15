@@ -4,8 +4,8 @@ const availableWaiter = waiters.find(w => w.status === "available");
 
 const orders = [
     {
-      id: "A64",
-      table: 24,
+      id: "A68",
+      table: 20,
       time: getRealTimeforOrder(),
       status: "prepare",
       menus: [
