@@ -298,7 +298,7 @@ body{
 
 .status-icon{
 
-  font-size:52px;
+  font-size:30px;
 
   color:#444;
 }
@@ -313,7 +313,7 @@ body{
 
 .status-number{
 
-  font-size:54px;
+  font-size:25px;
 
   font-weight:300;
 
@@ -432,11 +432,11 @@ body{
   }
 
   .status-number{
-    font-size:32px;
+    font-size:25px;
   }
 
   .status-icon{
-    font-size:32px;
+    font-size:30px;
   }
 
   .complete-btn,

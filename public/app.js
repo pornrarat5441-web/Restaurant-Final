@@ -2,8 +2,16 @@
    Kitchen Dashboard — app.js
    ============================ */
 
-const socket = io({
-  transports: ['websocket']
+const socket = io();
+
+socket.on('connect', () => {
+    console.log('CONNECTED');
+});
+
+// Listen for real-time updates
+socket.on('orders_updated', () => {
+  console.log('Orders updated, fetching new data...');
+  fetchOrders();
 });
 
 // ── Order Data and Fetching
@@ -21,13 +29,6 @@ function fetchOrders() {
 
 // Initial fetch
 fetchOrders();
-
-// Listen for real-time updates
-socket.on('orders_updated', () => {
-  console.log('Orders updated, fetching new data...');
-  fetchOrders();
-});
-
 
 // ── SVG icons ──────────────────────────────────────────
 const ICONS = {
