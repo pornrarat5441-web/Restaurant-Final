@@ -2,15 +2,22 @@
    Kitchen Dashboard — app.js
    ============================ */
 
-const socket = io();
+const socket = io({
+  transports: ['websocket', 'polling'],
+  upgrade: true
+});
 
 socket.on('connect', () => {
-    console.log('CONNECTED');
+    console.log('✅ SOCKET CONNECTED:', socket.id);
+});
+
+socket.on('connect_error', (error) => {
+    console.error('❌ SOCKET CONNECTION ERROR:', error);
 });
 
 // Listen for real-time updates
-socket.on('orders_updated', () => {
-  console.log('Orders updated signal received from server');
+socket.on('orders_updated', (data) => {
+  console.log('🔔 SIGNAL RECEIVED: orders_updated', data || '');
   fetchOrders();
 });
 
@@ -18,15 +25,16 @@ socket.on('orders_updated', () => {
 let ordersData = [];
 
 function fetchOrders() {
-  console.log('Fetching orders from /orders...');
+  console.log('📡 Fetching fresh orders from server...');
   fetch('/orders')
     .then(res => res.json())
     .then(data => {
-      console.log('Orders data received:', data);
+      console.log('📦 New Data Received:', data);
+      console.log('Total orders in DB:', data.length);
       ordersData = data;
       renderOrders();
     })
-    .catch(err => console.error('Error fetching orders:', err));
+    .catch(err => console.error('❌ Error fetching orders:', err));
 }
 
 // Initial fetch
