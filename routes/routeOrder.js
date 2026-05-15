@@ -7,7 +7,10 @@ const orders = require('../data/ordersData');
 router.post('/orders', async (req,res) => {
   try {
     await Order.insertMany(orders);
-    if (req.io) req.io.emit('orders_updated');
+    if (req.io) {
+      req.io.emit('orders_updated');
+      console.log('DEBUG: Emitted orders_updated event');
+    }
     res.send('add successfully');
   } catch(err) {
     console.log(err);
