@@ -19,8 +19,8 @@
     "start": "node kitchenServer.js",
     "dev": "nodemon kitchenServer.js",
     "electron:start": "electron electron.js",
-    "build:kitchen": "electron-builder build --config.productName=KitchenApp --config.extraMetadata.main=electron-kitchen.js -mw",
-    "build:pi": "electron-builder build --config.productName=PiApp --config.extraMetadata.main=electron-pi.js -mw"
+    "build:kitchen": "electron-builder build --config.productName=KitchenApp --config.extraMetadata.main=electron-kitchen.js -mwl",
+    "build:pi": "electron-builder build --config.productName=PiApp --config.extraMetadata.main=electron-pi.js -mwl"
   },
   "dependencies": {
     "dotenv": "^17.4.2",
@@ -41,6 +41,9 @@
     },
     "win": {
       "target": "portable"
+    },
+    "linux": {
+      "target": "deb"
     },
     "directories": {
       "output": "dist"
