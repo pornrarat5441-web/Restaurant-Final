@@ -5,8 +5,8 @@ let piWindow;
 
 function createWindows() {
   piWindow = new BrowserWindow({
-    width: 320,
-    height: 480,
+    width: 480,
+    height: 320,
     title: "Pi Server Dashboard",
     webPreferences: {
       nodeIntegration: false,

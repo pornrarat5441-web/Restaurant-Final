@@ -142,7 +142,7 @@ function renderApp() {
           </div>
           <div class="order-section">
             <div class="order-id">${currentOrderData.id}</div>
-            <div class="menu-list">
+            <div class="menu-list" style="margin: 0; background: rgba(0,0,0,0.05); padding: 10px; border-radius: 8px;">
               ${menuHtml}
             </div>
           </div>
@@ -177,7 +177,7 @@ function renderApp() {
         <div class="deliver-order">${currentOrderData.id}</div>
         <div class="deliver-table">Table ${currentOrderData.table}</div>
         
-        <div class="menu-list" style="margin: 20px 0; background: rgba(0,0,0,0.05); padding: 10px; border-radius: 8px;">
+        <div class="menu-list" style="margin: 0; background: rgba(0,0,0,0.05); padding: 10px; border-radius: 8px;">
           ${menuHtml}
         </div>
 
