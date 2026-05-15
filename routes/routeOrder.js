@@ -6,13 +6,10 @@ const orders = require('../data/ordersData');
 //create
 router.post('/orders', async (req,res) => {
   try {
-    let orderData = req.body;
+    const orderData = req.body;
 
-    // If body is empty, use the first item from ordersData.js as a fallback
     if (!orderData || Object.keys(orderData).length === 0) {
-      orderData = orders[0]; 
-      // Generate a new unique ID or timestamp to avoid duplicate key errors if needed
-      orderData.id = "A" + Math.floor(Math.random() * 1000);
+      return res.status(400).json({ error: "Order data is required" });
     }
 
     const newOrder = new Order(orderData);

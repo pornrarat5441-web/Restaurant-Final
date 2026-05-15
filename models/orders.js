@@ -5,7 +5,13 @@ const orderSchema = new mongoose.Schema({
 
   table: { type: Number, required: true },
 
-  time: { type: String, required: true },
+  time: { 
+    type: String, 
+    default: () => {
+      const now = new Date();
+      return `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+    }
+  },
 
   status: {
     type: String,
