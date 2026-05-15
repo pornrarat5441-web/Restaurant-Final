@@ -2,6 +2,10 @@
   "name": "restaurant-final",
   "version": "1.0.0",
   "description": "",
+  "author": {
+    "name": "Nikita",
+    "email": "pornrarat5441@gmail.com"
+  },
   "homepage": "https://github.com/pornrarat5441-web/Restaurant-Final#readme",
   "bugs": {
     "url": "https://github.com/pornrarat5441-web/Restaurant-Final/issues"
