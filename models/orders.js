@@ -9,7 +9,13 @@ const orderSchema = new mongoose.Schema({
     type: String, 
     default: () => {
       const now = new Date();
-      return `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+  
+      return now.toLocaleTimeString('th-TH', {
+        timeZone: 'Asia/Bangkok',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+      });
     }
   },
 
